@@ -48,7 +48,7 @@ const linkStyles = {
 	textDecoration: "none"
 };
 
-function Grid() {
+function Grid({ numberWithCommas }) {
 	const { setCountries, filteredCountries } = useContext(Context);
 	const [loader, setLoader] = useState(true);
 
@@ -82,7 +82,7 @@ function Grid() {
 								</ImageWrapper>
 								<CountryInfo>
 									<h3>{name}</h3>
-									<p>Population: {population}</p>
+									<p>Population: {numberWithCommas(population)}</p>
 									<strong>Region: {region}</strong>
 									<strong>Capital: {capital}</strong>
 								</CountryInfo>

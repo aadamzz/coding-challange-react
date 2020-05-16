@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Main = styled.main`
  	width: 100%;
-  	height: 45vh;
+  	height: 50vh;
   	display: flex;
   	align-items: center;
 	justify-content: center;
@@ -49,11 +49,11 @@ const ContentWrapper = styled.section`
 `;
 
 const FlagWrapper = styled.div`
-	width: 45%;
+	width: 40%;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	border: 1px solid white;
+	overflow: hidden;
 
 	img {
 		width: 100%;
@@ -66,29 +66,84 @@ const FlagWrapper = styled.div`
 //h100% - alternatywa przy rwd powinno wyjsc 
 
 const DetailsWrapper = styled.div`
-	width: 60%;
+	padding: 30px 30px 30px 70px;
+	width: 55%;
 	height: 100%;
-	border: 1px dotted white;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(4, 1fr);
 `;
 
-const AContainer = styled.div`
+const AContainer = styled.ul`
+	color: ${({ theme: { darkMode: { textColor } } }) => textColor}; 
+	grid-column: 1 / 3;
+	grid-row: 1 / 4; 
+	display: flex;
+	flex-direction: column;
+	/* justify-content: space-evenly; */
 
+	li {
+		padding-bottom: 15px;
+		font-weight: 600;
+
+		h2 {
+			padding-top: 24px;
+			font-size: 20px;
+			font-weight: 800;
+		}
+		h3 {
+			font-weight: 600;
+		}
+		span {
+			font-weight: 300;
+		}
+	}
 `;
 
-const BContainer = styled.div`
+const BContainer = styled.ul`
+	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+	grid-column: 3 / 5;
+	grid-row: 1 / 4;
+	display: flex;
+	flex-direction: column;
+	padding-top: 60px;
 
+	li { 
+		padding-bottom: 10px;
+		font-weight: 600;
+
+		span {
+			font-weight: 300;
+		}
+		ul {
+			display: flex;
+			li {
+				padding-left: 10px;
+				font-weight: 300;
+			}
+		}
+	}
 `;
 
-const CContainer = styled.ul`
+const CContainer = styled.div`
+	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+	grid-column: 1 / 5;
+	grid-row: 4 / 5;
+	
+	display: flex;
+	align-items: center;
 
+	ul {
+		display: flex;
+	}
 `;
 
+const numberWithCommas = x => {
+	return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
 
+// ta funkcje ewentualnie mozna popchnac od app 
 function Details({ match }) {
-
 	const [countryDetails, setCountryDetails] = useState({});
 	const [loader, setLoader] = useState(true);
 
@@ -98,7 +153,7 @@ function Details({ match }) {
 			const data = await response.json();
 
 			setCountryDetails(data);
-			setLoader(false)
+			setLoader(false);
 			console.log(data);
 		} catch (error) {
 			console.log(error)
@@ -127,42 +182,61 @@ function Details({ match }) {
 			</BackButtonContainer>
 			<Main>
 				<ContentWrapper>
-					{
-						countryDetails.map(({ flag, name }) => {
-							return <FlagWrapper>
-								<img src={flag} alt={name} />
-							</FlagWrapper>
-						})
-					}
-					{
-						countryDetails.map(({ nativeName, population, region, subregion, capital, alpha2Code, currencies, languages, borders }, index) => {
-							return <DetailsWrapper style={{ color: "white" }} key={index}>
-								<h2>Native name: {nativeName}</h2>
-								<p>Population: {population}</p>
-								<p>Region: {region}</p>
-								<p>Sub Region: {subregion}</p>
-								<p>Capital: {capital}</p>
-								<BContainer>
-									<strong>Top Level Domain: {alpha2Code}</strong>
-									<p>Currencies: {currencies[0].name}</p>
-									<ul style={{ display: "flex", border: '1px solid white' }}>Languages:
-									{
-											languages.map(({ name }, index) => {
-												return <li key={index}>{name}</li>
-											})
-										}
-									</ul>
-								</BContainer>
-								<CContainer>
-									{
-										borders.map((element, index) => {
-											return <li key={index}>{element}</li>
-										})
-									}
-								</CContainer>
-							</DetailsWrapper>
-						})
-					}
+					<FlagWrapper>
+						{
+							countryDetails.map(({ flag, name }, index) => {
+								return <img key={index} src={flag} alt={name} />
+							})
+						}
+					</FlagWrapper>
+					<DetailsWrapper>
+						{
+							countryDetails.map(({ name, nativeName, population, region, subregion, capital }, index) => {
+								return (
+									<AContainer key={index}>
+										<li><h2>{name}</h2></li>
+										<li><h3>Native Name: {nativeName}</h3></li>
+										<li>Population: <span>{numberWithCommas(population)}</span></li>
+										<li>Region: <span>{region}</span></li>
+										<li>Sub Region: <span>{subregion}</span></li>
+										<li>Capital: <span>{capital}</span></li>
+									</AContainer>
+								);
+							})
+						}
+						{
+							countryDetails.map(({ alpha2Code, currencies, languages }, index) => {
+								return (
+									<BContainer key={index}>
+										<li>Top Level Domain: <span>{alpha2Code}</span></li>
+										<li>Currencies: <span>{currencies[0].name}</span></li>
+										<li>
+											<ul>Languages:
+ 												{
+													languages.map(({ name }, index) => {
+														return <li key={index}>{name} </li>
+													})
+												}
+											</ul>
+										</li>
+									</BContainer>
+								);
+							})
+						}
+						<CContainer>
+							<ul>Border Countries:
+								{
+									countryDetails.map(({ borders }) => {
+										// console.log(borders)
+										return borders;
+									}).map((element, index) => {
+										console.log(element)
+										return <li key={index}>{element}</li>
+									})
+								}
+							</ul>
+						</CContainer>
+					</DetailsWrapper>
 				</ContentWrapper>
 			</Main>
 		</>
@@ -170,3 +244,38 @@ function Details({ match }) {
 };
 
 export default Details;
+
+
+
+
+
+// {
+// 	countryDetails.map(({ nativeName, population, region, subregion, capital, alpha2Code, currencies, languages, borders }, index) => {
+// 		return <DetailsWrapper style={{ color: "white" }} key={index}>
+// 			<h2>Native name: {nativeName}</h2>
+// 			<p>Population: {population}</p>
+// 			<p>Region: {region}</p>
+// 			<p>Sub Region: {subregion}</p>
+// 			<p>Capital: {capital}</p>
+// 			<BContainer>
+// 				<strong>Top Level Domain: {alpha2Code}</strong>
+// 				<p>Currencies: {currencies[0].name}</p>
+// 				<ul style={{ display: "flex", border: '1px solid white' }}>Languages:
+// 				{
+// 						languages.map(({ name }, index) => {
+// 							return <li key={index}>{name}</li>
+// 						})
+// 					}
+// 				</ul>
+// 			</BContainer>
+// 			<CContainer>
+// 				{
+// 					borders.map((element, index) => {
+// 						return <li key={index}>{element}</li>
+// 					})
+// 				}
+// 			</CContainer>
+// 		</DetailsWrapper>
+// 	})
+// }
+
