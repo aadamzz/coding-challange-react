@@ -9,6 +9,10 @@ const Main = styled.main`
   	display: flex;
   	align-items: center;
 	justify-content: center;
+
+	@media (max-width: 880px) {
+		height: 100vh;
+	}
 `;
 
 const BackButtonContainer = styled.div`
@@ -46,6 +50,10 @@ const ContentWrapper = styled.section`
 	height: 100%;
 	padding: 0 50px;
 	display: flex;
+
+	@media (max-width: 880px) {
+		flex-direction: column;
+	}
 `;
 
 const FlagWrapper = styled.div`
@@ -61,9 +69,16 @@ const FlagWrapper = styled.div`
  
 		/* height: 100%; */
 	}
-`;
 
-//h100% - alternatywa przy rwd powinno wyjsc 
+	@media (max-width: 880px) {
+		overflow: visible;
+		width: 350px;
+	};
+
+	@media (max-width: 440px) {
+		width: 250px;
+	};
+`;
 
 const DetailsWrapper = styled.div`
 	padding: 30px 30px 30px 70px;
@@ -72,6 +87,30 @@ const DetailsWrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(4, 1fr);
+
+	@media (max-width: 1070px) {
+		width: 65%;	
+	};
+
+	@media (max-width: 940px) {
+		width: 75%;
+	}
+	@media (max-width: 880px) {
+		width: 85%;
+		padding: 30px 0;
+
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(6, 1fr);
+
+		height: 500px;
+	}
+
+	@media (max-width: 350px) {
+		height: 460px;
+	}
+	/* @media (max-width: 840px) {
+		width: 50%;
+	} */
 `;
 
 const AContainer = styled.ul`
@@ -81,6 +120,11 @@ const AContainer = styled.ul`
 	display: flex;
 	flex-direction: column;
 	/* justify-content: space-evenly; */
+
+	@media (max-width: 880px) {
+		grid-row: 1 / 3;
+		grid-column: 1 / 2;
+	};
 
 	li {
 		padding-bottom: 15px;
@@ -108,6 +152,11 @@ const BContainer = styled.ul`
 	flex-direction: column;
 	padding-top: 60px;
 
+	@media (max-width: 880px) {
+		grid-row: 4 / 5;
+		grid-column: 1 / 2;
+	};
+
 	li { 
 		padding-bottom: 10px;
 		font-weight: 600;
@@ -133,6 +182,12 @@ const CContainer = styled.div`
 	display: flex;
 	align-items: center;
 
+	
+	@media (max-width: 880px) {
+		grid-row: 5 / 6;
+		grid-column: 1 / 2;
+	};
+
 	ul {
 		display: flex;
 	}
@@ -154,7 +209,6 @@ function Details({ match }) {
 
 			setCountryDetails(data);
 			setLoader(false);
-			console.log(data);
 		} catch (error) {
 			console.log(error)
 		}
@@ -227,10 +281,8 @@ function Details({ match }) {
 							<ul>Border Countries:
 								{
 									countryDetails.map(({ borders }) => {
-										// console.log(borders)
 										return borders;
 									}).map((element, index) => {
-										console.log(element)
 										return <li key={index}>{element}</li>
 									})
 								}
