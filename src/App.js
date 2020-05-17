@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     overflow: hidden;
 
     @media (max-width: 530px) {
-      font-size: 13px;
+      font-size: 15px;
     }
 `;
 

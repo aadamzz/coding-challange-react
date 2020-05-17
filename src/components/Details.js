@@ -11,7 +11,7 @@ const Main = styled.main`
 	justify-content: center;
 
 	@media (max-width: 880px) {
-		height: 100vh;
+		height: 75vh;
 	}
 `;
 
@@ -66,17 +66,17 @@ const FlagWrapper = styled.div`
 	img {
 		width: 100%;
   		height: auto;
- 
-		/* height: 100%; */
 	}
 
 	@media (max-width: 880px) {
 		overflow: visible;
 		width: 350px;
+		height: 240px;
 	};
 
 	@media (max-width: 440px) {
 		width: 250px;
+		height: 175px;
 	};
 `;
 
@@ -186,6 +186,7 @@ const CContainer = styled.div`
 	@media (max-width: 880px) {
 		grid-row: 5 / 6;
 		grid-column: 1 / 2;
+		width: 80vw;
 	};
 
 	ul {
