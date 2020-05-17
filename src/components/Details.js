@@ -49,7 +49,7 @@ const ContentWrapper = styled.section`
 `;
 
 const FlagWrapper = styled.div`
-	width: 40%;
+	width: 50%;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -67,7 +67,7 @@ const FlagWrapper = styled.div`
 
 const DetailsWrapper = styled.div`
 	padding: 30px 30px 30px 70px;
-	width: 55%;
+	width: 50%;
 	height: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);

@@ -24,7 +24,11 @@ const CountryTemplate = styled.section`
 `;
 
 const ImageWrapper = styled.div`
-    max-height: 30%;
+	width: 100%;
+    height: 30%;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
 
     img {
         width: 100%;
@@ -33,15 +37,24 @@ const ImageWrapper = styled.div`
 `;
 
 const CountryInfo = styled.div`
-    max-height: 70%;
+    height: 70%;
     background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
 
     color: ${({ theme: { darkMode: { textColor } } }) => textColor};
     
+	padding: 30px 20px;
 
     h3 {
         font-size: 18px;
+		font-weight: 600;
     }
+	p {
+		padding-top: 10px;
+		font-weight: 600;
+		span {
+			font-weight: 300;
+		}
+	}
 `;
 
 const linkStyles = {
@@ -82,9 +95,9 @@ function Grid({ numberWithCommas }) {
 								</ImageWrapper>
 								<CountryInfo>
 									<h3>{name}</h3>
-									<p>Population: {numberWithCommas(population)}</p>
-									<strong>Region: {region}</strong>
-									<strong>Capital: {capital}</strong>
+									<p>Population: <span>{numberWithCommas(population)}</span></p>
+									<p>Region: <span>{region}</span></p>
+									<p>Capital: <span>{capital}</span></p>
 								</CountryInfo>
 							</CountryTemplate>
 						</Link>
