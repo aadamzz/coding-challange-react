@@ -13,6 +13,10 @@ const Wrapper = styled.div`
     min-height: 100vh;
     background-color: ${props => props.theme.darkMode.backgroundColor};
     overflow: hidden;
+
+    @media (max-width: 530px) {
+      font-size: 13px;
+    }
 `;
 
 function App() {

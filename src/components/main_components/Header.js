@@ -20,7 +20,7 @@ const Header__title_container = styled.div`
     h1 {  
         margin-left: 50px;
         font-weight: 800;
-        font-size: 1.3125rem;
+        font-size: 22px;
         color: ${({ theme: { darkMode: { textColor } } }) => textColor};
     }
 `;

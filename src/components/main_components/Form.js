@@ -2,55 +2,38 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Context } from '../../context/Context';
 import styled from 'styled-components';
 
-// const Section = styled.section`
-//     width: 100%;
-//     height: 140px;
-//     display: flex;
-//     align-items: center;
-
-// 	@media (max-width: 700px) {
-// 		flex-direction: column;
-// 	}
-// `;
-
 const Section = styled.section`
     width: 100%;
     height: 140px;
     display: grid;
     align-items: center;
 	grid-template-columns: repeat(2, 1fr);
+
+	@media (max-width: 720px) {
+		grid-template-rows: repeat(2, 1fr);
+		margin: 20px 0;
+	}
 `;
 
-// const InputsForm = styled.form`
-//     display: flex;
-//     align-items: center;
-//     width: 50%;  
-//     height: 100%;
-//     justify-content: flex-start;
-//     margin-left: 50px;
-//     position: relative;
-
-// 	@media (max-width: 700px) {
-// 		width: 100%;
-// 	}
-// `;
 
 const InputsForm = styled.form`
     display: flex;
     align-items: center;
-    width: 50%;  
+    width: 70%;  
     height: 100%;
     justify-content: flex-start;
     margin-left: 50px;
     position: relative;
+	grid-column: 1 / 2;
 
-	@media (max-width: 700px) {
-		width: 100%;
+	@media (max-width: 720px) {
+		grid-row: 1 / 2;
 	}
 `;
 
 const Input = styled.input`
 	border: none;
+	height: 43px;
     padding: 12px;
     width: 400px;
     background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
@@ -59,12 +42,11 @@ const Input = styled.input`
     font-size: 15px;
     padding-left: 50px;
 
-	@media (max-width: 700px) {
-		width: 92.5%;
-	}
-
 	::placeholder { 
 		color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+	}
+	@media (max-width: 400px) {
+		width: 330px;
 	}
 `;
 
@@ -74,10 +56,13 @@ const InputsDropdownContainer = styled.div`
     justify-content: flex-end;
     width: 91.5%;  
 	height: 100%;
-	margin-right: 50px;
+	grid-column: 2 / -1;
 
-	 @media (max-width: 700px) {
-		width: 100%;
+	@media (max-width: 720px) {
+		grid-row: 2 / -1;  
+		grid-column: 1 / 2;
+		justify-content: flex-start;
+		padding-left: 50px;
 	}
 `;
 
@@ -95,10 +80,6 @@ const Select = styled.select`
 	padding-right: 50px;
 	border: none;
 	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
-
-	@media (max-width: 700px) {
-		width: 92.5%;
-	}
 `;
 
 function Form() {

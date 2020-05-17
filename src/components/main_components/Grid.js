@@ -11,7 +11,7 @@ const Main = styled.main`
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     justify-content: center;
     align-items: center;
-    grid-gap: 20px;
+    grid-gap: 25px;
     background-color: ${props => props.theme.darkMode.backgroundColor};
 `;
 
@@ -21,6 +21,11 @@ const CountryTemplate = styled.section`
     flex-direction: column;
     margin: 0;
     padding: 0;
+	margin-bottom: 15px;
+
+	@media(max-width: 720px) {
+		margin-bottom: 15px;
+	}
 `;
 
 const ImageWrapper = styled.div`
