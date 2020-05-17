@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/github.io/coding-challange-react/static/js/main.ebcf2929.chunk.js",
-    "main.js.map": "/github.io/coding-challange-react/static/js/main.ebcf2929.chunk.js.map",
-    "runtime-main.js": "/github.io/coding-challange-react/static/js/runtime-main.891fca97.js",
-    "runtime-main.js.map": "/github.io/coding-challange-react/static/js/runtime-main.891fca97.js.map",
-    "static/js/2.0b7c9c7b.chunk.js": "/github.io/coding-challange-react/static/js/2.0b7c9c7b.chunk.js",
-    "static/js/2.0b7c9c7b.chunk.js.map": "/github.io/coding-challange-react/static/js/2.0b7c9c7b.chunk.js.map",
-    "index.html": "/github.io/coding-challange-react/index.html",
-    "precache-manifest.c23fb99924e924abce20e671d77c59b6.js": "/github.io/coding-challange-react/precache-manifest.c23fb99924e924abce20e671d77c59b6.js",
-    "service-worker.js": "/github.io/coding-challange-react/service-worker.js",
-    "static/js/2.0b7c9c7b.chunk.js.LICENSE.txt": "/github.io/coding-challange-react/static/js/2.0b7c9c7b.chunk.js.LICENSE.txt"
+    "main.js": "/coding-challange-react/static/js/main.ebcf2929.chunk.js",
+    "main.js.map": "/coding-challange-react/static/js/main.ebcf2929.chunk.js.map",
+    "runtime-main.js": "/coding-challange-react/static/js/runtime-main.7f8e52ef.js",
+    "runtime-main.js.map": "/coding-challange-react/static/js/runtime-main.7f8e52ef.js.map",
+    "static/js/2.43b890ef.chunk.js": "/coding-challange-react/static/js/2.43b890ef.chunk.js",
+    "static/js/2.43b890ef.chunk.js.map": "/coding-challange-react/static/js/2.43b890ef.chunk.js.map",
+    "index.html": "/coding-challange-react/index.html",
+    "precache-manifest.29cbbb9bcd1f7abfc674a828070e96e1.js": "/coding-challange-react/precache-manifest.29cbbb9bcd1f7abfc674a828070e96e1.js",
+    "service-worker.js": "/coding-challange-react/service-worker.js",
+    "static/js/2.43b890ef.chunk.js.LICENSE.txt": "/coding-challange-react/static/js/2.43b890ef.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.891fca97.js",
-    "static/js/2.0b7c9c7b.chunk.js",
+    "static/js/runtime-main.7f8e52ef.js",
+    "static/js/2.43b890ef.chunk.js",
     "static/js/main.ebcf2929.chunk.js"
   ]
 }
