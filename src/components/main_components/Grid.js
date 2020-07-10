@@ -12,7 +12,7 @@ const Main = styled.main`
     justify-content: center;
     align-items: center;
     grid-gap: 25px;
-    background-color: ${props => props.theme.darkMode.backgroundColor};
+	background-color: ${({ theme: { backgroundColor } }) => backgroundColor};
 `;
 
 const CountryTemplate = styled.section`
@@ -21,6 +21,8 @@ const CountryTemplate = styled.section`
     flex-direction: column;
     margin: 0;
     padding: 0;
+	margin: 0 auto;
+	max-width: 1000px;
 	margin-bottom: 15px;
 
 	@media(max-width: 720px) {
@@ -43,10 +45,8 @@ const ImageWrapper = styled.div`
 
 const CountryInfo = styled.div`
     height: 70%;
-    background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
-
-    color: ${({ theme: { darkMode: { textColor } } }) => textColor};
-    
+	background-color: ${({ theme: { elementsColor } }) => elementsColor};
+	color: ${({ theme: { textColor } }) => textColor};    
 	padding: 30px 20px;
 
     h3 {
@@ -86,7 +86,6 @@ function Grid({ numberWithCommas }) {
 		fetchData();
 	}, [])
 
-
 	if (loader) return <Loader />;
 	return (
 		<Main>
@@ -114,20 +113,3 @@ function Grid({ numberWithCommas }) {
 };
 
 export default Grid;
-
-//jutro: 
-// poprawic grida i wyglad strony
-// filtrowanie przez nazwy regionow
-
-
-//  <CountryTemplate>
-//     <ImageWrapper>
-//         {/* <img src="http://placekitten.com/200/300" alt="country flag" /> */}
-//     </ImageWrapper>
-//     <CountryInfo>
-//         <h3>Germany</h3>
-//         <p>Population: 81,770,900</p>
-//         <strong>Region: Europe</strong>
-//         <strong>Capital: Berlin</strong>
-//     </CountryInfo>
-// </CountryTemplate> 

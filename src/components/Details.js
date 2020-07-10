@@ -9,6 +9,7 @@ const Main = styled.main`
   	display: flex;
   	align-items: center;
 	justify-content: center;
+	background-color: ${({ theme: { backgroundColor } }) => backgroundColor};
 
 	@media (max-width: 880px) {
 		height: 75vh;
@@ -26,9 +27,9 @@ const BackButtonContainer = styled.div`
 		width: 110px;
 		height: 41px;
 		font-size: 15px;
-		color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+		color: ${({ theme: { textColor } }) => textColor};
 		margin-left: 50px;
-		background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
+		background-color: ${({ theme: { elementsColor } }) => elementsColor};
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;
@@ -108,18 +109,14 @@ const DetailsWrapper = styled.div`
 	@media (max-width: 350px) {
 		height: 460px;
 	}
-	/* @media (max-width: 840px) {
-		width: 50%;
-	} */
 `;
 
 const AContainer = styled.ul`
-	color: ${({ theme: { darkMode: { textColor } } }) => textColor}; 
+	color: ${({ theme: { textColor } }) => textColor};
 	grid-column: 1 / 3;
 	grid-row: 1 / 4; 
 	display: flex;
 	flex-direction: column;
-	/* justify-content: space-evenly; */
 
 	@media (max-width: 880px) {
 		grid-row: 1 / 3;
@@ -145,7 +142,7 @@ const AContainer = styled.ul`
 `;
 
 const BContainer = styled.ul`
-	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+	color: ${({ theme: { textColor } }) => textColor};
 	grid-column: 3 / 5;
 	grid-row: 1 / 4;
 	display: flex;
@@ -175,7 +172,7 @@ const BContainer = styled.ul`
 `;
 
 const CContainer = styled.div`
-	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+	color: ${({ theme: { textColor } }) => textColor};
 	grid-column: 1 / 5;
 	grid-row: 4 / 5;
 	
@@ -191,6 +188,22 @@ const CContainer = styled.div`
 
 	ul {
 		display: flex;
+		flex-wrap: wrap;
+	}
+`;
+
+const BorderCountriesList = styled.li`
+	width: 70px;
+	height: 30px;
+	background-color: ${({ theme: { elementsColor } }) => elementsColor};
+	border-radius: 5px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	margin: 5px 5px;
+
+	@media(max-width: 420px) {
+		margin: 2px 2px;
 	}
 `;
 
@@ -198,17 +211,17 @@ const numberWithCommas = x => {
 	return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// ta funkcje ewentualnie mozna popchnac od app 
 function Details({ match }) {
 	const [countryDetails, setCountryDetails] = useState({});
 	const [loader, setLoader] = useState(true);
+	const [borderCountries, setBorderCountries] = useState([]);
 
 	const fetchData = async () => {
 		try {
 			const response = await fetch(`https://restcountries.eu/rest/v2/name/${match.params.name}`);
 			const data = await response.json();
-
 			setCountryDetails(data);
+			setBorderCountries(data.map(element => element.borders))
 			setLoader(false);
 		} catch (error) {
 			console.log(error)
@@ -219,7 +232,6 @@ function Details({ match }) {
 		fetchData();
 	}, [])
 
-	//tutaj mozna sie zastanowic czy Main ma byc wrapperem dla wszystkiego wlaczajac button czy button ma nie wchodzic w tresc Main
 
 	if (loader) return <Loader />
 	return (
@@ -279,13 +291,12 @@ function Details({ match }) {
 							})
 						}
 						<CContainer>
-							<ul>Border Countries:
+							<span>Border Countries:</span>
+							<ul>
 								{
-									countryDetails.map(({ borders }) => {
-										return borders;
-									}).map((element, index) => {
-										return <li key={index}>{element}</li>
-									})
+									countryDetails.map(element => element.borders)[0].map(element => (
+										<BorderCountriesList>{element}</BorderCountriesList>
+									))
 								}
 							</ul>
 						</CContainer>
@@ -297,38 +308,3 @@ function Details({ match }) {
 };
 
 export default Details;
-
-
-
-
-
-// {
-// 	countryDetails.map(({ nativeName, population, region, subregion, capital, alpha2Code, currencies, languages, borders }, index) => {
-// 		return <DetailsWrapper style={{ color: "white" }} key={index}>
-// 			<h2>Native name: {nativeName}</h2>
-// 			<p>Population: {population}</p>
-// 			<p>Region: {region}</p>
-// 			<p>Sub Region: {subregion}</p>
-// 			<p>Capital: {capital}</p>
-// 			<BContainer>
-// 				<strong>Top Level Domain: {alpha2Code}</strong>
-// 				<p>Currencies: {currencies[0].name}</p>
-// 				<ul style={{ display: "flex", border: '1px solid white' }}>Languages:
-// 				{
-// 						languages.map(({ name }, index) => {
-// 							return <li key={index}>{name}</li>
-// 						})
-// 					}
-// 				</ul>
-// 			</BContainer>
-// 			<CContainer>
-// 				{
-// 					borders.map((element, index) => {
-// 						return <li key={index}>{element}</li>
-// 					})
-// 				}
-// 			</CContainer>
-// 		</DetailsWrapper>
-// 	})
-// }
-

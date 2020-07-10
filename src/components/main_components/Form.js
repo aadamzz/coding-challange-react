@@ -8,13 +8,14 @@ const Section = styled.section`
     display: grid;
     align-items: center;
 	grid-template-columns: repeat(2, 1fr);
+	background-color: ${({ theme: { backgroundColor } }) => backgroundColor};
+
 
 	@media (max-width: 720px) {
 		grid-template-rows: repeat(2, 1fr);
-		margin: 20px 0;
+		padding: 20px 0;
 	}
 `;
-
 
 const InputsForm = styled.form`
     display: flex;
@@ -36,14 +37,15 @@ const Input = styled.input`
 	height: 43px;
     padding: 12px;
     width: 400px;
-    background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
+	background-color: ${({ theme: { elementsColor } }) => elementsColor};
+	box-shadow: ${({ theme: { inputShadow } }) => inputShadow};
     border-radius: 5px;
-    color: ${({ theme: { darkMode: { textColor } } }) => textColor};
-    font-size: 15px;
+	color: ${({ theme: { textColor } }) => textColor};
+	font-size: 15px;
     padding-left: 50px;
 
 	::placeholder { 
-		color: ${({ theme: { darkMode: { textColor } } }) => textColor};
+		color: ${({ theme: { textColor } }) => textColor};
 	}
 	@media (max-width: 400px) {
 		width: 330px;
@@ -74,16 +76,16 @@ const SvgStyles = {
 const Select = styled.select`
 	width: 200px;
 	padding: 12px;
-	background-color: ${({ theme: { darkMode: { elementsColor } } }) => elementsColor};
+	background-color: ${({ theme: { elementsColor } }) => elementsColor};
+	color: ${({ theme: { textColor } }) => textColor};
+	box-shadow: ${({ theme: { inputShadow } }) => inputShadow};
 	border-radius: 5px;
 	font-size: 15px;
 	padding-right: 50px;
 	border: none;
-	color: ${({ theme: { darkMode: { textColor } } }) => textColor};
 `;
 
 function Form() {
-	// zrobic custom hooka dla inputow, albo przynajmniej polaczyc to w jedno
 	const { countries, setFilteredCountries } = useContext(Context);
 	const [search, setSearch] = useState(() => '');
 	const [filter, setFilter] = useState(() => '');
